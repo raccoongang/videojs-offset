@@ -57,15 +57,17 @@ var vjsoffset = function(options) {
   }
 
   this.on('timeupdate', function(){
+    if (new Date() - (this.lastTimeUpdate || 0) < 1000) return;
+    this.lastTimeUpdate = new Date();
     var curr = this.currentTime();
-    if(curr < 0){
+    if (curr < 0) {
       this.currentTime(0);
       this.play();
     }
-    if(this._offsetEnd > 0 && (curr > (this._offsetEnd-this._offsetStart))) {
+    if (this._offsetEnd > 0 && (curr > (this._offsetEnd - this._offsetStart))) {
       this.pause();
       if (!this._restartBeginning) {
-        this.currentTime(this._offsetEnd-this._offsetStart);
+        this.currentTime(this._offsetEnd - this._offsetStart);
       } else {
         this.trigger('loadstart');
         this.currentTime(0);
