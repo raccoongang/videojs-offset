@@ -60,7 +60,7 @@ var vjsoffset = function(options) {
   this.on('timeupdate', function(){
     if (new Date() - (this.lastTimeUpdate || 0) < 1000) return;
     this.lastTimeUpdate = new Date();
-    var curr = this._currentTime || this.currentTime();
+    var curr = this.currentTime();
     if (curr < 0) {
       this.currentTime(this._currentTime);
     }
