@@ -21,12 +21,11 @@ const registerPlugin = videojs.registerPlugin || videojs.plugin;
  *           An object of options left to the plugin author to define.
  */
 const onPlayerReady = (player, options) => {
-  player.on('timeupdate', function() {
+  player.on('timeupdate', () => {
     const curr = this.currentTime();
 
     if (curr < 0) {
       this.currentTime(0);
-      this.play();
     }
     if (this._offsetEnd > 0 && curr > (this._offsetEnd - this._offsetStart)) {
       this.pause();
